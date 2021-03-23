@@ -10,8 +10,18 @@ def _start(client, message):
     client.send_message(message.chat.id,
         text=tr.START_MSG.format(message.from_user.first_name, message.from_user.id),
         parse_mode="markdown",
+        disable_notification = True,
+        reply_markup = InlineKeyboardMarkup(map(3)),
         reply_to_message_id=message.message_id
         )
+
+def map(pos):
+    if(pos==3):
+        button = [
+            [InlineKeyboardButton(text = '🗣 FIRST', url="https://t.me/mpazaanbots")]
+            [InlineKeyboardButton(text = '🗣 FRIST', url="https://t.me/munnipopz")]
+            [InlineKeyboardButton(text = '🗣 FIRST', url="https://t.me/mpazaanbot")]
+        ]
 
 
 @Client.on_message(filters.private & filters.incoming & filters.command(['help']))
@@ -20,7 +30,7 @@ def _help(client, message):
         text = tr.HELP_MSG[1],
         parse_mode="markdown",
         disable_notification = True,
-        reply_markup = InlineKeyboardMarkup(map(1)),
+        reply_markup = InlineKeyboardMarkup(map(4)),
         reply_to_message_id = message.message_id
     )
 
@@ -39,20 +49,21 @@ def help_answer(client, callback_query):
 def map(pos):
     if(pos==1):
         button = [
-            [InlineKeyboardButton(text = '▶️', callback_data = "help+2")]
+            [InlineKeyboardButton(text = '🤓OWNER🤓', url="https://t.me/Mpazaan")]
         ]
-    elif(pos==len(tr.HELP_MSG)-1):
-        url = "https://github.com/DamienSoukara/FSub-Heroku"
+    elif(pos==len(tr.HELP_MSG)-2):
+        url = "https://t.me/mpazaanbot"
         button = [
-            [InlineKeyboardButton(text = '🗣 Support Chat', url="https://t.me/damienhelp")],
-            [InlineKeyboardButton(text = '🤖 Source Code', url=url)],
-            [InlineKeyboardButton(text = '◀️', callback_data = f"help+{pos-1}")]
+            [InlineKeyboardButton(text = '➕️ ADD ME TO YOUR GROUP ➕️', url="t.me/ForceSubscriber_robot?startgroup=true")], [InlineKeyboardButton(text = '😈SUPPORT CHAT😈', url="https://t.me/mpazaanbot")],
+            [InlineKeyboardButton(text = '🤖SOURCE CODE🤖', url=url)],
+            [InlineKeyboardButton(text = '😆HELP😆', callback_data = f"help+{pos-1}")],
+            [InlineKeyboardButton(text = '😂NO OPEN😀', callback_data = f"start+{pos-1}")]
         ]
     else:
         button = [
             [
-                InlineKeyboardButton(text = '◀️', callback_data = f"help+{pos-1}"),
-                InlineKeyboardButton(text = '▶️', callback_data = f"help+{pos+1}")
+                InlineKeyboardButton(text = '😇FIRST😇', callback_data = f"help+{pos-1}"),
+                InlineKeyboardButton(text = '😈SECOND😈', callback_data = f"help+{pos+1}")
             ],
         ]
     return button
